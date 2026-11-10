@@ -1,0 +1,40 @@
+CAMPUS UNIVERSITY ADMINISTRATIVE SERVICES
+STUDENT FACILITATION AND CAMPUS RESOURCES GUIDE
+DOCUMENT CODE: ADMIN-FAQ-2025
+CATEGORY: Frequently Asked Questions (FAQs) & Administrative Policies
+EFFECTIVE DATE: Academic Year 2025-2026
+
+TITLE: GENERAL CAMPUS SERVICES, CERTIFICATE ISSUANCE, AND STUDENT AMENITIES FAQ
+
+1. OFFICIAL TRANSCRIPTS AND BONAFIDE CERTIFICATES
+1.1 How do students request official academic transcripts?
+    - Students can apply online through the CampusMind Student ERP portal under 'Academic Requests' or visit the Registrar Office (Window 3).
+    - Standard processing turnaround time is 5 to 7 working days.
+    - Express processing (turnaround within 48 hours) is available upon payment of an expedited fee of INR 1,000.
+1.2 How do students obtain a Bonafide / Enrollment Certificate for bus pass, passport, or bank loan purposes?
+    - Bonafide certificates are generated digitally with cryptographic QR verification on the ERP portal within 24 hours of submission free of charge.
+
+2. CENTRAL UNIVERSITY LIBRARY RULES
+2.1 Operational Hours:
+    - Regular Days: Monday to Saturday, 8:00 AM to 10:00 PM.
+    - Examination Months (November-December and April-May): 24/7 round-the-clock reading hall access.
+2.2 Borrowing Privileges:
+    - Undergraduate students: Up to 4 books for 14 days, with 1 online renewal permitted if no reservation exists.
+    - Overdue fine: INR 5 per day per overdue volume.
+
+3. CAMPUS HEALTH AND EMERGENCY SERVICES
+3.1 The University Health Center operates 24/7 with round-the-clock doctors, nurses, and two on-campus ICU ambulances.
+3.2 General Outpatient (OPD) clinic hours: 8:30 AM to 7:00 PM Monday through Saturday.
+3.3 Medical consultations and standard emergency medicines are completely free for all enrolled university students.
+3.4 Emergency Contact: Ext 108 or Dial +91-011-555-HEALTH from any campus landline.
+
+4. LOST ID CARD REPLACEMENT
+4.1 If a student loses their RFID Smart ID Card:
+    - Step 1: Immediately file an online report on the portal to block card access for campus gates and library.
+    - Step 2: Pay the replacement fee of INR 300 at the Accounts Counter.
+    - Step 3: Collect the newly encoded replacement card from the Proctor Office within 48 hours.
+
+5. CAMPUS WI-FI ACCESS AND IT HELPDESK
+5.1 High-speed campus-wide Wi-Fi (SSID: 'CampusMind-Secure') is available across all academic blocks, hostels, and libraries.
+5.2 Login Credentials: Username is your University Student Registration Number; initial password is sent to your registered student email.
+5.3 IT Helpdesk is located in Computing Center Building, Room 104 (Email: ithelpdesk@campusmind.edu, Ext 142).

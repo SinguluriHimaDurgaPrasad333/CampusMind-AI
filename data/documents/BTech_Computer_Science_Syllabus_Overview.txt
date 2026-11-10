@@ -1,0 +1,39 @@
+CAMPUS UNIVERSITY DEPARTMENT OF COMPUTER SCIENCE & ENGINEERING
+CURRICULUM AND DETAILED SYLLABUS HANDBOOK
+DOCUMENT CODE: SYLLABUS-CSE-2025
+CATEGORY: University Syllabus and Course Details
+EFFECTIVE DATE: 2025-2029 Cohort
+
+TITLE: BACHELOR OF TECHNOLOGY IN COMPUTER SCIENCE & ENGINEERING (B.TECH CSE)
+
+1. DEGREE CREDIT STRUCTURE (160 TOTAL CREDITS)
+1.1 Basic Science & Engineering Mathematics: 28 Credits.
+1.2 Core Computer Science Courses & Labs: 72 Credits.
+1.3 Professional Elective Streams: 30 Credits.
+1.4 Open Electives & Interdisciplinary Courses: 12 Credits.
+1.5 Humanities, Social Sciences & Management: 10 Credits.
+1.6 Project Work, Industrial Internship & Capstone Seminar: 18 Credits.
+
+2. CORE CSE COURSES AND PREREQUISITES
+2.1 CS201 - Data Structures and Algorithms (4 Credits, Semester 3):
+    - Linear structures (Arrays, Linked Lists, Stacks, Queues), Non-linear structures (Binary Trees, AVL Trees, Heaps, Graphs).
+    - Sorting, Searching, Dynamic Programming, Greedy Algorithms.
+2.2 CS202 - Object-Oriented Software Design (3 Credits, Semester 3):
+    - Java/C++, Encapsulation, Polymorphism, Design Patterns (Factory, Observer, Singleton).
+2.3 CS301 - Operating Systems Principles (4 Credits, Semester 4):
+    - Process Management, Multithreading, CPU Scheduling, Deadlocks, Virtual Memory, Paging, File Systems.
+2.4 CS302 - Database Management Systems (4 Credits, Semester 4):
+    - Relational Algebra, SQL, Normalization (1NF to BCNF), Transaction Processing, ACID properties, Indexing.
+2.5 CS303 - Computer Networks (4 Credits, Semester 5):
+    - OSI vs TCP/IP models, Flow/Error Control, Subnetting, Routing Algorithms, TCP/UDP, DNS, HTTP/HTTPS.
+2.6 CS401 - Artificial Intelligence and Machine Learning (4 Credits, Semester 6):
+    - Supervised Learning (Regression, SVM, Random Forests), Deep Learning basics, Natural Language Processing, RAG architectures.
+
+3. PROFESSIONAL ELECTIVE TRACKS
+3.1 Artificial Intelligence & Data Engineering (Deep Learning, Computer Vision, MLOps, LLMs).
+3.2 Cybersecurity and Cloud Defense (Cryptography, Network Security, Ethical Hacking, Cloud Sec).
+3.3 Cloud Computing and Distributed Systems (AWS/GCP architectures, Kubernetes, Microservices).
+
+4. CAPSTONE MAJOR PROJECT REQUIREMENTS
+4.1 Phase 1 (Semester 7, CS491, 4 Credits): Problem identification, literature review, architectural design, prototype demo.
+4.2 Phase 2 (Semester 8, CS492, 8 Credits): Full system deployment, empirical testing, research publication, final oral viva before external evaluation board.

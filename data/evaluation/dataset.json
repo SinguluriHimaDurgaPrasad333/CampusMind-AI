@@ -1,0 +1,182 @@
+[
+  {
+    "question_id": "EVAL-001",
+    "question": "What is the minimum attendance requirement to appear for the end-semester examinations?",
+    "expected_answer": "Students must secure a minimum attendance of 75% in aggregate across all lectures, tutorials, and laboratories of a course.",
+    "reference_document": "Attendance_Regulations_2025.txt",
+    "reference_page": 1,
+    "expected_source": "Attendance_Regulations_2025.txt, Section 1.2",
+    "category": "Attendance Policies"
+  },
+  {
+    "question_id": "EVAL-002",
+    "question": "How much attendance condonation can be granted for medical emergencies and what is the minimum required?",
+    "expected_answer": "The Dean of Academic Affairs may grant up to 10% condonation, lowering the requirement to 65%. Under no circumstances is attendance below 65% permitted.",
+    "reference_document": "Attendance_Regulations_2025.txt",
+    "reference_page": 1,
+    "expected_source": "Attendance_Regulations_2025.txt, Section 2.1-2.2",
+    "category": "Attendance Policies"
+  },
+  {
+    "question_id": "EVAL-003",
+    "question": "What is the deadline to report attendance discrepancies?",
+    "expected_answer": "Discrepancies in recorded attendance must be reported to the course instructor within 7 calendar days of the relevant lecture.",
+    "reference_document": "Attendance_Regulations_2025.txt",
+    "reference_page": 1,
+    "expected_source": "Attendance_Regulations_2025.txt, Section 4.3",
+    "category": "Attendance Policies"
+  },
+  {
+    "question_id": "EVAL-004",
+    "question": "When are the Fall semester mid-term examinations scheduled in the 2025-2026 academic calendar?",
+    "expected_answer": "Mid-Term Examinations for the Fall semester are scheduled from October 6, 2025 to October 11, 2025.",
+    "reference_document": "Academic_Calendar_2025_2026.txt",
+    "reference_page": 1,
+    "expected_source": "Academic_Calendar_2025_2026.txt, Section 1.4",
+    "category": "Academic Calendars"
+  },
+  {
+    "question_id": "EVAL-005",
+    "question": "When does the Spring 2026 semester commence and when are the classes scheduled to end?",
+    "expected_answer": "Spring semester classes commence on January 5, 2026, and the last instructional day is April 24, 2026.",
+    "reference_document": "Academic_Calendar_2025_2026.txt",
+    "reference_page": 1,
+    "expected_source": "Academic_Calendar_2025_2026.txt, Section 2.1, 2.5",
+    "category": "Academic Calendars"
+  },
+  {
+    "question_id": "EVAL-006",
+    "question": "What are the dates for the annual cultural and tech fest CampusPulse?",
+    "expected_answer": "The annual cultural and tech fest CampusPulse takes place from March 19, 2026 to March 21, 2026.",
+    "reference_document": "Academic_Calendar_2025_2026.txt",
+    "reference_page": 1,
+    "expected_source": "Academic_Calendar_2025_2026.txt, Section 2.4",
+    "category": "Academic Calendars"
+  },
+  {
+    "question_id": "EVAL-007",
+    "question": "What are the minimum passing marks in the End-Semester Examination and overall aggregate?",
+    "expected_answer": "To pass, a student must secure at least 40% in the End-Semester Examination and at least 45% aggregate marks combining CIA and End-Semester.",
+    "reference_document": "Examination_Guidelines_and_Grading_System.txt",
+    "reference_page": 1,
+    "expected_source": "Examination_Guidelines_and_Grading_System.txt, Section 2.3",
+    "category": "Examination Guidelines"
+  },
+  {
+    "question_id": "EVAL-008",
+    "question": "What is the fee and deadline to apply for re-evaluation of answer scripts?",
+    "expected_answer": "Students may apply for re-evaluation within 10 calendar days of grade declaration with a non-refundable scrutiny fee of INR 500 per theory course.",
+    "reference_document": "Examination_Guidelines_and_Grading_System.txt",
+    "reference_page": 1,
+    "expected_source": "Examination_Guidelines_and_Grading_System.txt, Section 3.1-3.2",
+    "category": "Examination Guidelines"
+  },
+  {
+    "question_id": "EVAL-009",
+    "question": "What is the disciplinary penalty for having a mobile phone in the examination hall?",
+    "expected_answer": "Having a mobile phone results in confiscation, referral to the Unfair Means Committee, debarment from remaining papers, and rustication for one subsequent semester.",
+    "reference_document": "Examination_Guidelines_and_Grading_System.txt",
+    "reference_page": 1,
+    "expected_source": "Examination_Guidelines_and_Grading_System.txt, Section 5.1-5.3",
+    "category": "Examination Guidelines"
+  },
+  {
+    "question_id": "EVAL-010",
+    "question": "What is the hostel curfew time on weekdays and weekends?",
+    "expected_answer": "Curfew time is 10:00 PM on weekdays (Sunday to Thursday) and 10:30 PM on weekends (Friday and Saturday).",
+    "reference_document": "Hostel_Rules_and_Disciplinary_Code.txt",
+    "reference_page": 1,
+    "expected_source": "Hostel_Rules_and_Disciplinary_Code.txt, Section 1.1",
+    "category": "Hostel Rules and Regulations"
+  },
+  {
+    "question_id": "EVAL-011",
+    "question": "Are electric kettles or induction cooktops allowed in hostel rooms?",
+    "expected_answer": "No, electric kettles and induction cooktops are strictly prohibited. Possession carries a fine of INR 2000 and confiscation.",
+    "reference_document": "Hostel_Rules_and_Disciplinary_Code.txt",
+    "reference_page": 1,
+    "expected_source": "Hostel_Rules_and_Disciplinary_Code.txt, Section 3.1-3.2",
+    "category": "Hostel Rules and Regulations"
+  },
+  {
+    "question_id": "EVAL-012",
+    "question": "What is the procedure for an overnight hostel night-out leave?",
+    "expected_answer": "Apply for a Night-Out Pass via CampusMind ERP at least 24 hours in advance with parent OTP/email verification before Warden approval.",
+    "reference_document": "Hostel_Rules_and_Disciplinary_Code.txt",
+    "reference_page": 1,
+    "expected_source": "Hostel_Rules_and_Disciplinary_Code.txt, Section 2.1-2.2",
+    "category": "Hostel Rules and Regulations"
+  },
+  {
+    "question_id": "EVAL-013",
+    "question": "Who is eligible for the Merit Scholarship and what is the benefit?",
+    "expected_answer": "The top 5% of students in each department with a CGPA of 9.0 or higher receive a 50% waiver on tuition fees for the succeeding year.",
+    "reference_document": "Merit_and_Need_Scholarship_Policy.txt",
+    "reference_page": 1,
+    "expected_source": "Merit_and_Need_Scholarship_Policy.txt, Section 1.1-1.2",
+    "category": "Scholarship Information"
+  },
+  {
+    "question_id": "EVAL-014",
+    "question": "What is the family income limit and waiver for Need-Based Financial Assistance?",
+    "expected_answer": "Gross family income must be below INR 3,50,000 per annum with min 7.0 CGPA. Income below INR 1,50,000 gets 75% waiver, and INR 1,50,000-3,50,000 gets 40% waiver.",
+    "reference_document": "Merit_and_Need_Scholarship_Policy.txt",
+    "reference_page": 1,
+    "expected_source": "Merit_and_Need_Scholarship_Policy.txt, Section 2.2-2.3",
+    "category": "Scholarship Information"
+  },
+  {
+    "question_id": "EVAL-015",
+    "question": "What are the tuition fee payment due dates for Fall and Spring semesters?",
+    "expected_answer": "Fees must be paid on or before July 25 for Fall semester and December 24 for Spring semester.",
+    "reference_document": "Tuition_Fee_Payment_and_Refund_Rules.txt",
+    "reference_page": 1,
+    "expected_source": "Tuition_Fee_Payment_and_Refund_Rules.txt, Section 1.1",
+    "category": "Fee-related Policies"
+  },
+  {
+    "question_id": "EVAL-016",
+    "question": "What is the refund percentage if a student withdraws 15 days or more before classes commence?",
+    "expected_answer": "100% refund of tuition and academic fees minus a maximum deduction of INR 1,000 processing fee.",
+    "reference_document": "Tuition_Fee_Payment_and_Refund_Rules.txt",
+    "reference_page": 1,
+    "expected_source": "Tuition_Fee_Payment_and_Refund_Rules.txt, Section 3.1 Tier 1",
+    "category": "Fee-related Policies"
+  },
+  {
+    "question_id": "EVAL-017",
+    "question": "How many total credits are required to complete the B.Tech in Computer Science and Engineering?",
+    "expected_answer": "A total of 160 credits are required for the B.Tech Computer Science and Engineering degree.",
+    "reference_document": "BTech_Computer_Science_Syllabus_Overview.txt",
+    "reference_page": 1,
+    "expected_source": "BTech_Computer_Science_Syllabus_Overview.txt, Section 1.1",
+    "category": "University Syllabus and Course Details"
+  },
+  {
+    "question_id": "EVAL-018",
+    "question": "How many books can undergraduate students borrow from the University Library and for how long?",
+    "expected_answer": "Undergraduate students can borrow up to 4 books for 14 days, with 1 online renewal allowed if not reserved.",
+    "reference_document": "University_Administrative_and_Campus_FAQ.txt",
+    "reference_page": 1,
+    "expected_source": "University_Administrative_and_Campus_FAQ.txt, Section 2.2",
+    "category": "Frequently Asked Questions (FAQs) & Administrative Policies"
+  },
+  {
+    "question_id": "EVAL-019",
+    "question": "What is the replacement fee and processing time for a lost student ID card?",
+    "expected_answer": "The replacement fee is INR 300 paid at Accounts, and the replacement card is issued by the Proctor Office within 48 hours.",
+    "reference_document": "University_Administrative_and_Campus_FAQ.txt",
+    "reference_page": 1,
+    "expected_source": "University_Administrative_and_Campus_FAQ.txt, Section 4.1",
+    "category": "Frequently Asked Questions (FAQs) & Administrative Policies"
+  },
+  {
+    "question_id": "EVAL-020",
+    "question": "What is the turn-around time and fee for express academic transcripts?",
+    "expected_answer": "Express processing turnaround time is within 48 hours upon payment of an expedited fee of INR 1,000.",
+    "reference_document": "University_Administrative_and_Campus_FAQ.txt",
+    "reference_page": 1,
+    "expected_source": "University_Administrative_and_Campus_FAQ.txt, Section 1.1",
+    "category": "Frequently Asked Questions (FAQs) & Administrative Policies"
+  }
+]

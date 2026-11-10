@@ -1,0 +1,29 @@
+CAMPUS UNIVERSITY DEPARTMENT OF COMPUTER SCIENCE & ENGINEERING
+COURSE CODE: CS301
+COURSE TITLE: OPERATING SYSTEMS PRINCIPLES
+CATEGORY: University Syllabus and Course Details
+ACADEMIC YEAR: 2025-2026
+
+1. PROCESS MANAGEMENT AND CPU SCHEDULING
+1.1 Process vs Thread:
+- Process: Program in execution with its own address space, PCB (Process Control Block), text, data, heap, and stack.
+- Thread: Lightweight unit of CPU utilization sharing code, data, and OS resources with peer threads, but having its own stack and registers.
+1.2 CPU Scheduling Algorithms:
+- First-Come First-Served (FCFS): Non-preemptive, suffers from Convoy Effect.
+- Shortest Job First (SJF): Optimal average waiting time, but suffers from starvation of long jobs.
+- Round Robin (RR): Preemptive using time quantum, fair sharing, optimal for interactive systems.
+- Multi-Level Feedback Queue (MLFQ): Dynamically adjusts process priorities based on burst behavior.
+
+2. SYNCHRONIZATION AND DEADLOCKS
+2.1 Critical Section Problem:
+- Requirements: Mutual Exclusion, Progress, Bounded Waiting.
+- Synchronization primitives: Mutex Locks, Semaphores (Counting and Binary), Monitored Condition Variables.
+2.2 Deadlock Coffman Conditions:
+- Mutual Exclusion, Hold and Wait, No Preemption, Circular Wait.
+- Avoidance: Banker's Algorithm ensures system never enters an unsafe state.
+
+3. MEMORY MANAGEMENT
+3.1 Paging and Virtual Memory:
+- Logical address translated to physical address via Page Table using TLB (Translation Lookaside Buffer).
+- Page Fault: Interrupt raised when referenced page is not in physical RAM, triggers demand paging swap from disk.
+- Page Replacement Algorithms: FIFO, Optimal (Belady's), Least Recently Used (LRU), Clock algorithm.

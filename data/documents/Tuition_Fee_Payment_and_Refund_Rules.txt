@@ -1,0 +1,28 @@
+CAMPUS UNIVERSITY FINANCE & ACCOUNTS DEPARTMENT
+OFFICE OF THE CHIEF FINANCIAL OFFICER
+DOCUMENT CODE: FIN-FEE-2025
+CATEGORY: Fee-related Policies
+EFFECTIVE DATE: Academic Year 2025-2026
+
+TITLE: SEMESTER FEE PAYMENT SCHEDULE, LATE CHARGES, AND WITHDRAWAL REFUND POLICIES
+
+1. FEE PAYMENT TIMELINE AND MODES
+1.1 All tuition, laboratory, and campus facility fees must be paid per the following semester schedules:
+    - Fall Semester (Odd): Full fee payable on or before July 25.
+    - Spring Semester (Even): Full fee payable on or before December 24.
+1.2 Payment must be made through the official CampusMind ERP payment gateway using Net Banking, UPI, NEFT, or Credit/Debit cards. Cash payments are not accepted.
+
+2. LATE PAYMENT PENALTIES
+2.1 Delays in semester fee settlement incur the following daily penalties:
+    - Days 1 to 10 past due date: Late fee of INR 100 per calendar day.
+    - Days 11 to 20 past due date: Late fee of INR 250 per calendar day.
+    - Beyond 20 days: Student portal registration is suspended, course LMS access is restricted, and attendance will not be recorded until the fine and fee are cleared.
+
+3. ADMISSION WITHDRAWAL AND TUITION FEE REFUND SCHEDULE
+3.1 In accordance with University Grants Commission (UGC) mandates, refunds on withdrawal of admission are governed by the following tiers:
+    - Tier 1: Formal withdrawal request submitted 15 days or more before the formally notified commencement date of classes: 100% refund of tuition and academic fees (minus a maximum deduction of INR 1,000 as processing fee).
+    - Tier 2: Withdrawal request submitted less than 15 days before the commencement date of classes: 80% refund of fees.
+    - Tier 3: Withdrawal request submitted within 15 days after the commencement date of classes: 50% refund of fees.
+    - Tier 4: Withdrawal request submitted beyond 30 days after the commencement date of classes: 0% refund of tuition and academic fees.
+3.2 Institutional Caution Deposit is 100% refundable after deducting pending campus dues or library clearances.
+3.3 Approved refund claims are credited to the student's registered bank account within 15 business days.
