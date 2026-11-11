@@ -15,9 +15,9 @@ if %errorlevel% neq 0 (
 )
 
 echo [1/2] Initializing knowledge base and checking dependencies...
-python -c "import streamlit, sentence_transformers, chromadb; print('Dependencies verified!')"
+python -c "import flask, sentence_transformers, chromadb; print('Dependencies verified!')"
 
-echo [2/2] Launching CampusAI Streamlit Application...
-python -m streamlit run app.py --server.port 8501 --server.address localhost
+echo [2/2] Launching CampusAI Application on http://localhost:8501...
+python app.py
 
 pause

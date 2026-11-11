@@ -1,0 +1,190 @@
+{% extends "base.html" %}
+
+{% block title %}CampusAI Assistant – AI Student Chatbot{% endblock %}
+
+{% block content %}
+<div class="chat-container">
+  <!-- Chat Header -->
+  <div class="chat-header">
+    <div class="chat-header-info">
+      <div class="chat-header-avatar">🤖</div>
+      <div>
+        <h2 class="chat-header-title">CampusAI Assistant</h2>
+        <div class="chat-header-status">
+          <span class="chat-status-dot"></span>
+          <span>Ready to help • Grounded in university documents</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <button class="btn btn-secondary" id="clearChatBtn" style="padding: 8px 16px; font-size: 0.85rem;">🗑️ Clear Chat</button>
+    </div>
+  </div>
+
+  <!-- Chat Messages -->
+  <div class="chat-messages" id="chatMessages">
+    <!-- Welcome Message -->
+    <div class="message-row assistant">
+      <div class="msg-avatar">🎓</div>
+      <div class="msg-bubble">
+        <p><strong>Hello! I'm CampusAI, your AI Student Assistant. 🎓</strong></p>
+        <p>I can help you find information about university syllabuses, examinations, attendance requirements, academic regulations, scholarships, and campus services.</p>
+        <p>What would you like to know?</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Suggested Question Chips -->
+  <div style="padding: 0 24px; background: #FFFFFF;">
+    <div class="suggested-chips">
+      <span class="s-chip" onclick="sendSuggested('What is the minimum attendance requirement?')">⏱️ Attendance Requirement</span>
+      <span class="s-chip" onclick="sendSuggested('Explain binary search with Python code')">💻 Binary Search in Python</span>
+      <span class="s-chip" onclick="sendSuggested('Draft a formal sick leave email to my professor')">📝 Sick Leave Email</span>
+      <span class="s-chip" onclick="sendSuggested('How can I apply for a scholarship?')">🏆 Scholarship Policy</span>
+      <span class="s-chip" onclick="sendSuggested('What are the dates for mid-term exams?')">📅 Exam Dates</span>
+    </div>
+  </div>
+
+  <!-- Input Bar -->
+  <form class="chat-input-bar" id="chatForm">
+    <input 
+      type="text" 
+      id="chatInput" 
+      placeholder="Ask a question about university rules, exams, syllabus, coding..." 
+      autocomplete="off"
+      required
+    >
+    <button type="submit" class="chat-send-btn" id="sendBtn">➤</button>
+  </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  const chatMessages = document.getElementById('chatMessages');
+  const chatForm = document.getElementById('chatForm');
+  const chatInput = document.getElementById('chatInput');
+  const sendBtn = document.getElementById('sendBtn');
+  const clearChatBtn = document.getElementById('clearChatBtn');
+
+  // Check URL query param if present
+  const urlParams = new URLSearchParams(window.location.search);
+  const initialQuery = urlParams.get('q');
+  if (initialQuery) {
+    chatInput.value = initialQuery;
+    setTimeout(() => { chatForm.dispatchEvent(new Event('submit')); }, 200);
+  }
+
+  function appendMessage(role, text, sources = [], latency = null, provider = '') {
+    const row = document.createElement('div');
+    row.className = `message-row ${role}`;
+
+    const avatar = document.createElement('div');
+    avatar.className = 'msg-avatar';
+    avatar.textContent = role === 'user' ? '👤' : '🎓';
+
+    const bubble = document.createElement('div');
+    bubble.className = 'msg-bubble';
+
+    // Format Markdown-like basic elements
+    let formattedText = text
+      .replace(/\n\n/g, '</p><p>')
+      .replace(/\n/g, '<br>')
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.*?)\*/g, '<em>$1</em>')
+      .replace(/`([^`]+)`/g, '<code style="background:#F1F5F9; padding:2px 6px; border-radius:4px; font-size:0.88em; color:#0F172A;">$1</code>');
+
+    // Code blocks
+    if (formattedText.includes('```')) {
+      formattedText = formattedText.replace(/```([a-z]*)\s*([\s\S]*?)```/gi, '<pre><code>$2</code></pre>');
+    }
+
+    bubble.innerHTML = `<p>${formattedText}</p>`;
+
+    // Add source citations if present
+    if (sources && sources.length > 0) {
+      const citeBox = document.createElement('div');
+      citeBox.className = 'citation-box';
+      citeBox.innerHTML = '<strong>Verified Sources:</strong><br>' + 
+        sources.map(s => `<span class="citation-chip">📑 ${s.display}</span>`).join('');
+      bubble.appendChild(citeBox);
+    }
+
+    if (latency) {
+      const meta = document.createElement('div');
+      meta.className = 'msg-meta';
+      meta.innerHTML = `⚡ Latency: ${latency} ms | Provider: ${provider || 'CampusAI'}`;
+      bubble.appendChild(meta);
+    }
+
+    row.appendChild(avatar);
+    row.appendChild(bubble);
+    chatMessages.appendChild(row);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  chatForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const query = chatInput.value.trim();
+    if (!query) return;
+
+    appendMessage('user', query);
+    chatInput.value = '';
+    chatInput.disabled = true;
+    sendBtn.disabled = true;
+
+    // Loading indicator
+    const loadingRow = document.createElement('div');
+    loadingRow.className = 'message-row assistant';
+    loadingRow.id = 'loadingIndicator';
+    loadingRow.innerHTML = `
+      <div class="msg-avatar">🎓</div>
+      <div class="msg-bubble" style="color: #64748B;">
+        <em>CampusAI is searching university documents...</em>
+      </div>
+    `;
+    chatMessages.appendChild(loadingRow);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query: query })
+      });
+      const data = await response.json();
+
+      // Remove loading indicator
+      const loader = document.getElementById('loadingIndicator');
+      if (loader) loader.remove();
+
+      appendMessage('assistant', data.answer, data.sources, data.latency_ms, data.provider);
+    } catch (err) {
+      const loader = document.getElementById('loadingIndicator');
+      if (loader) loader.remove();
+      appendMessage('assistant', 'Sorry, I encountered an issue connecting to the university server. Please try again.');
+    } finally {
+      chatInput.disabled = false;
+      sendBtn.disabled = false;
+      chatInput.focus();
+    }
+  });
+
+  function sendSuggested(question) {
+    chatInput.value = question;
+    chatForm.dispatchEvent(new Event('submit'));
+  }
+
+  clearChatBtn.addEventListener('click', () => {
+    chatMessages.innerHTML = `
+      <div class="message-row assistant">
+        <div class="msg-avatar">🎓</div>
+        <div class="msg-bubble">
+          <p><strong>Chat history cleared. 🎓</strong></p>
+          <p>I'm ready for your questions about university syllabuses, exams, attendance, and campus rules.</p>
+        </div>
+      </div>
+    `;
+  });
+</script>
+{% endblock %}

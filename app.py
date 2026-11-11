@@ -1,141 +1,173 @@
 """
-CampusAI - Main Streamlit Application
-====================================
-Master application entrypoint providing structured multi-level navigation,
-quick-action switchers, instant student query shortcuts, telemetry,
-and Modern Educational Light Theme styling.
+CampusAI - Flask Web Application
+================================
+Lightweight, beginner-friendly web application for university student assistance.
+Powered by Flask, ChromaDB, SentenceTransformers, and RAG.
+Runs natively locally (python app.py) and on Render (gunicorn app:app).
 """
 
-import streamlit as st
+import os
+import shutil
 from pathlib import Path
+from flask import Flask, render_template, request, jsonify, redirect, url_for, flash
+import pandas as pd
+
 from config import (
+    DOCUMENTS_DIR,
+    FAQS_FILE,
+    EVALUATION_FILE,
     PROJECT_NAME,
     PROJECT_CODE,
-    PROJECT_TAGLINE,
-    ASSETS_DIR,
-    EMBEDDING_MODEL_NAME
+    PROJECT_TAGLINE
 )
-from auth import is_admin_authenticated
-from vector_database import get_or_create_collection
-from rag_pipeline import ensure_knowledge_base_initialized
+from rag_pipeline import answer_student_query, ensure_knowledge_base_initialized
+from vector_database import get_or_create_collection, index_document_chunks
+from document_processor import process_document, detect_document_category
+from faq_manager import load_all_faqs, get_faq_categories
+from evaluation import load_evaluation_dataset, run_rag_evaluation
 
-# Streamlit Page Configuration must be the first command
-st.set_page_config(
-    page_title="CampusAI – AI Student Assistance Chatbot",
-    page_icon="🎓",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
+app = Flask(__name__, static_folder="static", template_folder="templates")
+app.secret_key = os.urandom(24)
 
-# Auto-initialize Knowledge Base on startup
-ensure_knowledge_base_initialized()
+# Ensure knowledge base is initialized on application startup
+with app.app_context():
+    try:
+        ensure_knowledge_base_initialized()
+    except Exception as e:
+        print(f"Knowledge base auto-init note: {e}")
 
-# Inject custom light-theme styling
-css_path = ASSETS_DIR / "style.css"
-if css_path.exists():
-    with open(css_path, "r", encoding="utf-8") as f:
-        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
-# ----------------- SIDEBAR HEADER & BRANDING -----------------
-logo_path = ASSETS_DIR / "logo.svg"
-logo_svg = ""
-if logo_path.exists():
-    with open(logo_path, "r", encoding="utf-8") as f:
-        logo_svg = f.read()
+# ----------------- PAGE ROUTES -----------------
+@app.route("/")
+def home():
+    """Renders the Home landing page."""
+    return render_template("home.html", active_page="home")
 
-st.sidebar.markdown(
-    f"""
-    <div class="sidebar-brand-box">
-        <div style="width: 44px; height: 44px; flex-shrink: 0;">
-            {logo_svg}
-        </div>
-        <div>
-            <h3 class="brand-title">CampusAI</h3>
-            <p class="brand-tagline">AI Student Assistant</p>
-        </div>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
 
-# Quick Action Hub (1-Click Primary Buttons at the top of the sidebar)
-st.sidebar.markdown("<p style='font-size: 0.78rem; font-weight: 700; color: #64748B; text-transform: uppercase; margin-bottom: 6px;'>⚡ Quick Jump</p>", unsafe_allow_html=True)
-q_col1, q_col2 = st.sidebar.columns(2)
-with q_col1:
-    if st.button("💬 Chatbot", key="sb_quick_chat", use_container_width=True, type="primary"):
-        st.switch_page("pages/chatbot.py")
-with q_col2:
-    if st.button("📚 FAQs", key="sb_quick_faqs", use_container_width=True):
-        st.switch_page("pages/faqs.py")
+@app.route("/chat")
+def chat():
+    """Renders the AI Chatbot interface."""
+    return render_template("chat.html", active_page="chat")
 
-# ----------------- STRUCTURED MULTI-LEVEL NAVIGATION -----------------
-# Grouped into clear institutional levels
-pages = {
-    "🎯 Level 1: Student Assistance": [
-        st.Page("pages/home.py", title="Home Dashboard", icon="🏠", default=True),
-        st.Page("pages/chatbot.py", title="AI Chatbot Assistant", icon="💬"),
-        st.Page("pages/faqs.py", title="University FAQs", icon="📚"),
-    ],
-    "🗂️ Level 2: Knowledge Base": [
-        st.Page("pages/knowledge_base.py", title="Document Ingestion & Vectors", icon="🗄️"),
-    ],
-    "📊 Level 3: Benchmarks & Evaluation": [
-        st.Page("pages/evaluation_dashboard.py", title="RAG Evaluation Dashboard", icon="📈"),
-    ],
-    "ℹ️ Level 4: Project Info & Viva": [
-        st.Page("pages/about.py", title="About Project & Viva Notes", icon="🎓"),
-    ]
-}
 
-# Run navigation controller
-pg = st.navigation(pages)
+@app.route("/faqs")
+def faqs_page():
+    """Renders the Frequently Asked Questions page."""
+    faqs_data = load_all_faqs()
+    categories = get_faq_categories(faqs_data)
+    return render_template("faqs.html", active_page="faqs", faqs=faqs_data, categories=categories)
 
-# ----------------- SIDEBAR QUICK QUERY SHORTCUTS -----------------
-with st.sidebar.expander("💡 Instant Question Shortcuts", expanded=False):
-    st.caption("Click any question to ask CampusAI directly:")
-    if st.button("⏱️ Attendance Requirement", key="sb_q1", use_container_width=True):
-        st.session_state["pending_query"] = "What is the minimum attendance requirement?"
-        st.switch_page("pages/chatbot.py")
-    if st.button("📝 Exam Passing Rules", key="sb_q2", use_container_width=True):
-        st.session_state["pending_query"] = "What are the minimum passing marks in exams?"
-        st.switch_page("pages/chatbot.py")
-    if st.button("🏆 Scholarship Policy", key="sb_q3", use_container_width=True):
-        st.session_state["pending_query"] = "How can I apply for a scholarship?"
-        st.switch_page("pages/chatbot.py")
-    if st.button("🏢 Hostel Curfew Hours", key="sb_q4", use_container_width=True):
-        st.session_state["pending_query"] = "What is the hostel curfew time?"
-        st.switch_page("pages/chatbot.py")
 
-# ----------------- SIDEBAR SYSTEM TELEMETRY -----------------
-try:
-    coll = get_or_create_collection()
-    chunk_count = coll.count()
-except Exception:
-    chunk_count = 0
+@app.route("/knowledge-base")
+def knowledge_base_page():
+    """Renders the Knowledge Base management page."""
+    doc_files = []
+    if DOCUMENTS_DIR.exists():
+        supported_exts = {".txt", ".pdf", ".docx", ".csv", ".json"}
+        for p in sorted(DOCUMENTS_DIR.glob("*")):
+            if p.suffix.lower() in supported_exts:
+                doc_files.append({
+                    "name": p.name,
+                    "category": detect_document_category(p.name),
+                    "extension": p.suffix.upper(),
+                    "size_kb": round(p.stat().st_size / 1024, 1)
+                })
 
-admin_badge = (
-    "<span style='color: #059669; font-weight: 600;'>Admin Active</span>"
-    if is_admin_authenticated()
-    else "<span style='color: #64748B;'>Student View</span>"
-)
+    try:
+        col = get_or_create_collection()
+        total_chunks = col.count()
+    except Exception:
+        total_chunks = 0
 
-st.sidebar.markdown(
-    f"""
-    <div style="margin-top: 15px; border-top: 1px solid #E2E8F0; padding-top: 12px;">
-        <p style="font-weight: 700; font-size: 0.78rem; color: #64748B; text-transform: uppercase; margin-bottom: 8px;">System Status</p>
-        <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; padding: 10px 12px; font-size: 0.82rem; line-height: 1.6; color: #334155;">
-            <div>🟢 <strong>System:</strong> Online</div>
-            <div>🧠 <strong>Model:</strong> <code>{EMBEDDING_MODEL_NAME}</code></div>
-            <div>🗄️ <strong>Indexed Chunks:</strong> <code>{chunk_count}</code></div>
-            <div>👤 <strong>Access Mode:</strong> {admin_badge}</div>
-            <div>📌 <strong>Project:</strong> <code>{PROJECT_CODE} (SIH1631)</code></div>
-        </div>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+    return render_template(
+        "knowledge_base.html",
+        active_page="kb",
+        documents=doc_files,
+        total_chunks=total_chunks
+    )
 
-st.sidebar.caption("CampusAI © 2026 • SIH1631 P08")
 
-# Execute the selected page
-pg.run()
+@app.route("/evaluation")
+def evaluation_page():
+    """Renders the RAG Evaluation Benchmark Dashboard."""
+    try:
+        df_eval = load_evaluation_dataset()
+        questions = df_eval.to_dict(orient="records")
+    except Exception:
+        questions = []
+
+    return render_template("evaluation.html", active_page="eval", questions=questions)
+
+
+@app.route("/about")
+def about_page():
+    """Renders the Project Details and Viva Notes page."""
+    return render_template("about.html", active_page="about")
+
+
+# ----------------- REST API ENDPOINTS -----------------
+@app.route("/api/chat", methods=["POST"])
+def api_chat():
+    """API endpoint for student questions."""
+    data = request.get_json() or {}
+    query = data.get("query", "").strip()
+
+    if not query:
+        return jsonify({
+            "query": "",
+            "answer": "Please ask a question or say hello!",
+            "sources": [],
+            "latency_ms": 0.0,
+            "provider": "Validation Guard"
+        })
+
+    result = answer_student_query(query)
+    return jsonify(result)
+
+
+@app.route("/api/upload", methods=["POST"])
+def api_upload():
+    """Handles document upload and auto-indexing into ChromaDB."""
+    if "document" not in request.files:
+        flash("No file part provided", "error")
+        return redirect(url_for("knowledge_base_page"))
+
+    file = request.files["document"]
+    if file.filename == "":
+        flash("No file selected", "error")
+        return redirect(url_for("knowledge_base_page"))
+
+    filename = file.filename
+    target_path = DOCUMENTS_DIR / filename
+    file.save(str(target_path))
+
+    # Process and index
+    try:
+        chunks = process_document(target_path)
+        if chunks:
+            index_document_chunks(chunks)
+            flash(f"Successfully uploaded and indexed {filename} ({len(chunks)} chunks)!", "success")
+        else:
+            flash(f"Uploaded {filename}, but no text chunks could be extracted.", "warning")
+    except Exception as e:
+        flash(f"Error processing {filename}: {str(e)}", "error")
+
+    return redirect(url_for("knowledge_base_page"))
+
+
+@app.route("/api/evaluate", methods=["POST"])
+def api_evaluate():
+    """Executes live benchmark evaluation and returns KPI metrics."""
+    try:
+        results = run_rag_evaluation(limit=10)
+        return jsonify(results)
+    except Exception as e:
+        return jsonify({"error": str(e), "summary": {}}), 500
+
+
+# ----------------- MAIN ENTRYPOINT -----------------
+if __name__ == "__main__":
+    # Local development server
+    port = int(os.environ.get("PORT", 8501))
+    print(f"Starting CampusAI Flask application on http://localhost:{port}...")
+    app.run(host="0.0.0.0", port=port, debug=False)

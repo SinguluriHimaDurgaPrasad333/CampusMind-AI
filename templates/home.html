@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+
+{% block title %}CampusAI – Meet Your Smart AI Student Assistant{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-card">
+  <div class="hero-text">
+    <div class="hero-badge">🎓 SIH 2024 (SIH1631) • Project P08</div>
+    <h1 class="hero-heading">Meet <span>CampusAI</span></h1>
+    <h2 class="hero-subheading">Your Intelligent University Assistant</h2>
+    <p class="hero-description">
+      Get accurate, reliable answers about academics, examinations, university regulations, 
+      campus services, syllabus details, and scholarships — powered by Retrieval-Augmented Generation (RAG).
+    </p>
+    <div class="hero-actions">
+      <a href="/chat" class="btn btn-primary">💬 Start Chatting</a>
+      <a href="/faqs" class="btn btn-secondary">📚 Explore University FAQs</a>
+    </div>
+  </div>
+
+  <div class="hero-graphic">
+    <div style="font-size: 8rem; line-height: 1; text-align: center; filter: drop-shadow(0 10px 15px rgba(37,99,235,0.15));">
+      🤖
+    </div>
+  </div>
+</section>
+
+<!-- 4 Feature Cards -->
+<section>
+  <div class="section-header">
+    <h2 class="section-title">Everything You Need For University Life</h2>
+    <p class="section-subtitle">Reliable, instant, and verified assistance for all student queries</p>
+  </div>
+
+  <div class="cards-grid">
+    <div class="feature-card">
+      <div class="card-icon-box icon-blue">🎓</div>
+      <h3 class="card-title">Academic Assistance</h3>
+      <p class="card-desc">Find reliable information about course syllabuses, attendance shortage condonation, and examination rules.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="card-icon-box icon-purple">🏛️</div>
+      <h3 class="card-title">University Information</h3>
+      <p class="card-desc">Access official university policies, academic calendar dates, hostel curfews, and administrative guidelines.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="card-icon-box icon-green">🤖</div>
+      <h3 class="card-title">AI-Powered Search</h3>
+      <p class="card-desc">Advanced semantic retrieval powered by SentenceTransformers and ChromaDB vector search.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="card-icon-box icon-amber">📑</div>
+      <h3 class="card-title">Reliable Sources</h3>
+      <p class="card-desc">Every official university response includes the supporting document name and page number citation.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 4-Step Workflow -->
+<section class="workflow-section">
+  <div class="section-header">
+    <h2 class="section-title">How CampusAI Works</h2>
+    <p class="section-subtitle">Zero-hallucination Retrieval-Augmented Generation pipeline</p>
+  </div>
+
+  <div class="workflow-steps">
+    <div class="workflow-step">
+      <div class="step-num">1</div>
+      <div class="step-icon">💬</div>
+      <h4 class="step-title">Ask a Question</h4>
+      <p class="step-desc">Type your academic, exam, or campus policy question.</p>
+    </div>
+
+    <div class="workflow-step">
+      <div class="step-num">2</div>
+      <div class="step-icon">🔍</div>
+      <h4 class="step-title">Search Documents</h4>
+      <p class="step-desc">Semantic vector search scans official university files.</p>
+    </div>
+
+    <div class="workflow-step">
+      <div class="step-num">3</div>
+      <div class="step-icon">📑</div>
+      <h4 class="step-title">Retrieve Information</h4>
+      <p class="step-desc">Extracts highest-scoring passages and verifies similarity.</p>
+    </div>
+
+    <div class="workflow-step">
+      <div class="step-num">4</div>
+      <div class="step-icon">✨</div>
+      <h4 class="step-title">Grounded Answer</h4>
+      <p class="step-desc">Delivers precise answers with verified document citations.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Clickable Example Questions -->
+<section>
+  <div class="section-header">
+    <h2 class="section-title">Try Asking CampusAI</h2>
+    <p class="section-subtitle">Click any question below to test the AI Assistant instantly</p>
+  </div>
+
+  <div class="questions-grid">
+    <a href="/chat?q=What+is+the+minimum+attendance+requirement%3F" class="question-chip">
+      <span>⏱️</span>
+      <span>What is the minimum attendance requirement?</span>
+    </a>
+    <a href="/chat?q=What+are+the+dates+for+mid-term+exams%3F" class="question-chip">
+      <span>📅</span>
+      <span>What are the dates for mid-term exams?</span>
+    </a>
+    <a href="/chat?q=How+does+the+re-evaluation+process+work%3F" class="question-chip">
+      <span>📝</span>
+      <span>How does the re-evaluation process work?</span>
+    </a>
+    <a href="/chat?q=How+can+I+apply+for+a+scholarship%3F" class="question-chip">
+      <span>🏆</span>
+      <span>How can I apply for a scholarship?</span>
+    </a>
+    <a href="/chat?q=What+are+the+hostel+curfew+hours%3F" class="question-chip">
+      <span>🏢</span>
+      <span>What are the hostel curfew hours?</span>
+    </a>
+    <a href="/chat?q=Explain+binary+search+with+Python+code" class="question-chip">
+      <span>💻</span>
+      <span>Explain binary search with Python code</span>
+    </a>
+  </div>
+</section>
+{% endblock %}

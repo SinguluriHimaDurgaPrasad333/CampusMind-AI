@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}CampusAI – AI Student Assistance Chatbot{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="/" class="brand">
+        <div class="brand-logo">🎓</div>
+        <div class="brand-text">
+          <h1>CampusAI</h1>
+          <p>AI Student Assistant</p>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li class="nav-item"><a href="/" class="{% if active_page == 'home' %}active{% endif %}">🏠 Home</a></li>
+        <li class="nav-item"><a href="/chat" class="{% if active_page == 'chat' %}active chat-nav-btn{% endif %}">💬 AI Chatbot</a></li>
+        <li class="nav-item"><a href="/faqs" class="{% if active_page == 'faqs' %}active{% endif %}">📚 FAQs</a></li>
+        <li class="nav-item"><a href="/knowledge-base" class="{% if active_page == 'kb' %}active{% endif %}">🗄️ Knowledge Base</a></li>
+        <li class="nav-item"><a href="/evaluation" class="{% if active_page == 'eval' %}active{% endif %}">📊 Evaluation</a></li>
+        <li class="nav-item"><a href="/about" class="{% if active_page == 'about' %}active{% endif %}">🎓 About</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main Content Block -->
+  <main class="main-content">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>CampusAI – AI Student Assistance Chatbot • Project Code: <strong>P08</strong> • Reference: <strong>SIH 2024 (SIH1631)</strong></p>
+    <p style="margin-top: 4px; color: #94A3B8;">Built with Python, RAG & SentenceTransformers</p>
+  </footer>
+
+  {% block scripts %}{% endblock %}
+</body>
+</html>
