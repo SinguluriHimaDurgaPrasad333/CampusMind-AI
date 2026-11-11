@@ -1,0 +1,367 @@
+/* CampusAI — Modern Educational Light Theme CSS */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --bg-main: #F8FAFF;
+  --primary-blue: #2563EB;
+  --primary-hover: #1D4ED8;
+  --sky-blue: #60A5FA;
+  --light-blue: #DBEAFE;
+  --soft-purple: #EDE9FE;
+  --purple-text: #7C3AED;
+  --mint-green: #D1FAE5;
+  --mint-text: #059669;
+  --white-card: #FFFFFF;
+  --main-text: #1E293B;
+  --secondary-text: #64748B;
+  --border-color: #E2E8F0;
+  --card-shadow: 0 4px 20px -2px rgba(37, 99, 235, 0.06), 0 2px 6px -1px rgba(0, 0, 0, 0.04);
+  --card-shadow-hover: 0 10px 25px -3px rgba(37, 99, 235, 0.12), 0 4px 10px -2px rgba(0, 0, 0, 0.04);
+}
+
+/* Base Body & App Container */
+.stApp {
+  background-color: var(--bg-main) !important;
+  font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  color: var(--main-text) !important;
+}
+
+/* Force Light Theme Colors on Streamlit Main and Sidebar */
+[data-testid="stSidebar"] {
+  background-color: #FFFFFF !important;
+  border-right: 1px solid var(--border-color) !important;
+  box-shadow: 2px 0 16px rgba(37, 99, 235, 0.05) !important;
+}
+
+[data-testid="stHeader"] {
+  background-color: rgba(248, 250, 255, 0.85) !important;
+  backdrop-filter: blur(10px);
+}
+
+/* Typography Headings */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--main-text) !important;
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em;
+}
+
+p, span, label, div {
+  color: var(--main-text);
+}
+
+/* Top Branding Bar in Sidebar */
+.sidebar-brand-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  background: linear-gradient(135deg, #EFF6FF 0%, #F5F3FF 100%);
+  border: 1px solid var(--light-blue);
+  border-radius: 16px;
+  margin-bottom: 14px;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.06);
+}
+
+.brand-title {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--primary-blue);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.brand-tagline {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--secondary-text);
+  margin: 0;
+}
+
+/* Streamlit Sidebar Section Header (Levels) Styling */
+[data-testid="stSidebarNav"] {
+  padding-top: 6px;
+}
+
+[data-testid="stSidebarNavItems"] {
+  gap: 6px !important;
+}
+
+/* Section Header Labels for Levels */
+[data-testid="stSidebarNavSectionHeader"] {
+  font-size: 0.8rem !important;
+  font-weight: 800 !important;
+  color: #1E40AF !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.04em !important;
+  padding: 10px 8px 4px 8px !important;
+}
+
+/* Navigation Link Items */
+[data-testid="stSidebarNavLink"] {
+  border-radius: 10px !important;
+  padding: 8px 12px !important;
+  transition: all 0.2s ease !important;
+  color: var(--main-text) !important;
+  font-weight: 600 !important;
+  font-size: 0.92rem !important;
+  border: 1px solid transparent !important;
+}
+
+[data-testid="stSidebarNavLink"]:hover {
+  background-color: #EFF6FF !important;
+  border-color: #BFDBFE !important;
+  color: var(--primary-blue) !important;
+  transform: translateX(3px);
+}
+
+[data-testid="stSidebarNavLink"][aria-current="page"] {
+  background: linear-gradient(135deg, #DBEAFE 0%, #EDE9FE 100%) !important;
+  border-color: #93C5FD !important;
+  color: #1D4ED8 !important;
+  font-weight: 700 !important;
+}
+
+/* Modern Rounded Card Elements */
+.campus-card {
+  background: var(--white-card);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: var(--card-shadow);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  margin-bottom: 20px;
+}
+
+.campus-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--card-shadow-hover);
+  border-color: var(--sky-blue);
+}
+
+/* Hero Section Container */
+.hero-wrapper {
+  background: linear-gradient(135deg, #FFFFFF 0%, #F0F7FF 60%, #F5F3FF 100%);
+  border: 1px solid #DBEAFE;
+  border-radius: 24px;
+  padding: 40px;
+  box-shadow: var(--card-shadow);
+  margin-bottom: 30px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #EFF6FF;
+  border: 1px solid #BFDBFE;
+  color: #1D4ED8;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+/* Feature Cards Grid */
+.feature-box {
+  background: var(--white-card);
+  border: 1px solid var(--border-color);
+  border-radius: 18px;
+  padding: 22px;
+  height: 100%;
+  box-shadow: var(--card-shadow);
+  transition: all 0.25s ease;
+}
+
+.feature-box:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--card-shadow-hover);
+  border-color: var(--sky-blue);
+}
+
+.icon-bubble {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  margin-bottom: 14px;
+}
+
+.icon-blue { background: #DBEAFE; color: #1D4ED8; }
+.icon-purple { background: #EDE9FE; color: #6D28D9; }
+.icon-green { background: #D1FAE5; color: #047857; }
+.icon-amber { background: #FEF3C7; color: #B45309; }
+
+/* Workflow Steps */
+.step-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: #FFFFFF;
+  border: 1px solid var(--border-color);
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: var(--card-shadow);
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.step-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 170px;
+}
+
+.step-num {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #EFF6FF;
+  color: var(--primary-blue);
+  border: 2px solid var(--sky-blue);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+}
+
+.step-text h5 {
+  margin: 0;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--main-text);
+}
+
+.step-text p {
+  margin: 0;
+  font-size: 0.76rem;
+  color: var(--secondary-text);
+}
+
+.step-arrow {
+  color: #94A3B8;
+  font-size: 1.2rem;
+}
+
+/* Chat Status Pill */
+.chat-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 16px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  background: #D1FAE5;
+  color: #065F46;
+  border: 1px solid #A7F3D0;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10B981;
+  box-shadow: 0 0 6px #10B981;
+}
+
+/* Custom Citation Badge */
+.citation-box {
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin-top: 10px;
+  font-size: 0.85rem;
+}
+
+.citation-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #EFF6FF;
+  border: 1px solid #BFDBFE;
+  color: #1E40AF;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  margin: 2px 4px 2px 0;
+}
+
+/* Streamlit Button Overrides */
+.stButton > button {
+  background-color: var(--primary-blue) !important;
+  color: #FFFFFF !important;
+  border: none !important;
+  border-radius: 10px !important;
+  padding: 8px 18px !important;
+  font-weight: 600 !important;
+  font-size: 0.92rem !important;
+  transition: all 0.2s ease !important;
+  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2) !important;
+}
+
+.stButton > button:hover {
+  background-color: var(--primary-hover) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3) !important;
+}
+
+/* Secondary Button Style */
+.stButton > button[kind="secondary"] {
+  background-color: #FFFFFF !important;
+  color: var(--main-text) !important;
+  border: 1px solid var(--border-color) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+}
+
+.stButton > button[kind="secondary"]:hover {
+  background-color: #F8FAFC !important;
+  border-color: var(--sky-blue) !important;
+  color: var(--primary-blue) !important;
+}
+
+/* KPI Metric Cards in Dashboard */
+.metric-card {
+  background: #FFFFFF;
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 18px 20px;
+  box-shadow: var(--card-shadow);
+  text-align: center;
+}
+
+.metric-value {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--primary-blue);
+  line-height: 1.1;
+  margin: 8px 0 4px 0;
+}
+
+.metric-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--secondary-text);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+/* Accessibility: Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

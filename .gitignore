@@ -25,8 +25,12 @@ wheels/
 # Databases & Vector store runtime files
 *.db
 *.sqlite3
+chroma_db/
 data/vector_store/*.faiss
 data/vector_store/*.pkl
+
+# Streamlit Local Credentials
+.streamlit/credentials.toml
 
 # Frontend Node
 frontend/node_modules/

@@ -1,0 +1,12 @@
+{
+  "academic_year": "2025-2026",
+  "fee_structure": {
+    "btech_tuition_per_semester": 95000,
+    "hostel_occupancy_dual": 42000,
+    "hostel_occupancy_single": 55000,
+    "mess_annual_advance": 38000,
+    "caution_deposit_refundable": 10000
+  },
+  "payment_modes": ["Online ERP Netbanking", "NEFT/RTGS", "UPI Portal"],
+  "note": "SAMPLE DATA — FOR DEMONSTRATION ONLY"
+}

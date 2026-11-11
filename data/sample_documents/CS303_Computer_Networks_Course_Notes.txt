@@ -1,0 +1,38 @@
+CAMPUS UNIVERSITY DEPARTMENT OF COMPUTER SCIENCE & ENGINEERING
+COURSE CODE: CS303
+COURSE TITLE: COMPUTER NETWORKS
+CATEGORY: University Syllabus and Course Details
+ACADEMIC YEAR: 2025-2026
+
+1. APPLICATION LAYER PROTOCOLS
+1.1 DHCP (Dynamic Host Configuration Protocol):
+- Definition: DHCP (Dynamic Host Configuration Protocol) is a network management client-server protocol used to dynamically assign IP addresses, subnet masks, default gateways, and DNS server addresses to client devices joining a network.
+- Purpose: Eliminates manual IP address configuration on every individual host, prevents IP address conflicts, and enables efficient reuse of IP addresses in local area networks (LANs).
+- Port Numbers: DHCP operates over UDP. DHCP Server listens on UDP Port 67, and DHCP Client listens on UDP Port 68.
+- The 4-Step DORA Process:
+  (1) Discover (DHCPDISCOVER): Client broadcasts a message to locate available DHCP servers on the subnet.
+  (2) Offer (DHCPOFFER): One or more DHCP servers unicast/broadcast an offer containing a reserved IP address and configuration parameters.
+  (3) Request (DHCPREQUEST): Client broadcasts acceptance of the offered IP configuration and requests lease confirmation.
+  (4) Acknowledge (DHCPACK): Server confirms the lease, commits the IP address binding in its database, and client configures its network interface.
+- DHCP Lease Time: The temporary duration for which an assigned IP address is valid before the client must send a DHCPREQUEST to renew.
+
+1.2 DNS (Domain Name System):
+- Hierarchical, distributed naming system that translates human-readable domain names (e.g., campusmind.edu) into machine-readable IP addresses.
+- Operates on UDP Port 53 for standard queries and TCP Port 53 for zone transfers.
+
+1.3 HTTP and HTTPS:
+- Hypertext Transfer Protocol (Port 80) and HTTPS (Port 443 with TLS/SSL encryption) for web resource delivery.
+
+2. TRANSPORT LAYER PRINCIPLES
+2.1 Transmission Control Protocol (TCP):
+- Connection-oriented, reliable, byte-stream protocol with 3-way handshake (SYN, SYN-ACK, ACK), flow control via sliding window, and congestion control (Slow Start, Congestion Avoidance, Fast Retransmit).
+2.2 User Datagram Protocol (UDP):
+- Connectionless, lightweight, unreliable datagram service with minimal header overhead (8 bytes), ideal for real-time VoIP, streaming, and DNS/DHCP.
+
+3. NETWORK LAYER AND ROUTING
+3.1 IPv4 vs IPv6 Addressing:
+- IPv4 uses 32-bit addresses divided into network and host portions using CIDR subnet notation.
+- IPv6 uses 128-bit hexadecimal addresses providing 3.4 x 10^38 unique addresses, stateless address autoconfiguration (SLAAC), and built-in IPsec.
+3.2 Routing Protocols:
+- Intra-domain: OSPF (Open Shortest Path First, Link-State algorithm using Dijkstra) and RIP (Routing Information Protocol, Distance Vector using Bellman-Ford).
+- Inter-domain: BGP (Border Gateway Protocol, Path Vector).

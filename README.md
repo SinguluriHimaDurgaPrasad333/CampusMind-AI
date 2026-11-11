@@ -1,253 +1,224 @@
-# CampusMind AI — Intelligent University Student Assistant Using RAG
+# CampusAI – AI Student Assistance Chatbot
 
-[![Python](https://img.shields.io/badge/Python-3.11%20%7C%203.12%20%7C%203.13-blue.svg)](https://www.python.org/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.110+-009688.svg)](https://fastapi.tiangolo.com/)
-[![React](https://img.shields.io/badge/React-18.3-61dafb.svg)](https://react.dev/)
-[![Vite](https://img.shields.io/badge/Vite-5.4-646cff.svg)](https://vitejs.dev/)
-[![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-3.4-38bdf8.svg)](https://tailwindcss.com/)
-[![FAISS](https://img.shields.io/badge/FAISS-CPU%201.15-orange.svg)](https://github.com/facebookresearch/faiss)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Python](https://img.shields.io/badge/Python-3.11%20%7C%203.12%20%7C%203.13-2563EB.svg)](https://www.python.org/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-1.40+-FF4B4B.svg)](https://streamlit.io/)
+[![ChromaDB](https://img.shields.io/badge/ChromaDB-Vector%20Store-orange.svg)](https://www.trychroma.com/)
+[![Sentence%20Transformers](https://img.shields.io/badge/Sentence--Transformers-all--MiniLM--L6--v2-7C3AED.svg)](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2)
+[![License](https://img.shields.io/badge/License-MIT-059669.svg)](LICENSE)
 
-**CampusMind AI** is a production-style, modern, full-stack AI assistant engineered specifically for university academic environments. Built with a high-performance **Retrieval-Augmented Generation (RAG)** architecture, it delivers accurate, context-aware, and verifiable answers to student inquiries regarding **academic regulations, examination codes, attendance requirements, hostel curfew policies, fee schedules, scholarships, course syllabi, and administrative procedures**.
-
-All factual responses are strictly grounded in institutional source documents with verifiable page and document citations.
-
----
-
-## 🌟 Key Highlights & Engineering Features
-
-- **Strict Document Grounding (Zero Hallucination)**: The AI assistant answers *only* from verified passages extracted from uploaded university documents.
-- **Institutional Fallback Disclaimer**: If evidence is missing or confidence is low, the chatbot safely returns:
-  > *"I couldn't find reliable information about this in the available university documents. Please check with the relevant university department."*
-- **Verifiable Source Citations & Inspector Drawer**: Every response displays source document chips (e.g., `[Attendance_Regulations_2025.txt - Page 1]`). Clicking a chip opens the **Source Inspector Modal** displaying the exact text snippet and relevance score.
-- **Dual Vector Store Architecture**: Integrated with **FAISS (`faiss-cpu`)** using Inner Product on L2-normalized dense embeddings, with an automatic exact cosine similarity fallback.
-- **Multi-Format Document Ingestion**: Ingests and normalizes **PDF, DOCX, CSV, TXT, and Markdown** files with overlapping recursive character chunking.
-- **Dual-Mode LLM Support**: Works seamlessly with **Google Gemini API** (`gemini-2.0-flash` or `gemini-1.5-flash`) and includes an intelligent **Local Context-Grounded Synthesizer fallback** for 100% offline demonstration without paid API keys.
-- **Automated RAG Evaluation Suite**: Evaluates against a 20-question benchmark dataset measuring **Recall@1 (95.0%)**, **Recall@K (100.0%)**, **MRR (0.9625)**, **Groundedness (62.8%)**, and **Latency (0.9 ms)**.
-- **Futuristic Deep-Space UI**: Built with React 18, Vite, Tailwind CSS, Framer Motion, and Lucide React icons featuring aurora gradients, glassmorphism, responsive chat sidebar, and light/dark theme toggle.
-- **Admin Document Management**: Secure admin portal for uploading, chunking, categorizing, deleting, and rebuilding vector indexes.
-- **Audit & Analytics**: Tracks query latency, user satisfaction feedback (thumbs up/down), and logs **Unanswered Questions** so administrators can identify gaps in institutional policies.
+**Project Code:** P08  
+**Project Title:** AI Student Assistance Chatbot  
+**Competition / Reference:** SIH 2024 – SIH1631: AI-Powered Student Assistance Chatbot  
+**Author:** B.Tech Computer Science & Engineering (AI & ML)  
+**Tagline:** *"Your Smart Companion for University Life"*
 
 ---
 
-## 🏛️ System Architecture
+## 📖 1. Project Overview & Objective
 
-```mermaid
-flowchart TD
-    subgraph UI["Frontend Layer (React + Vite + Tailwind)"]
-        Landing["Landing Page"]
-        Chat["Chatbot Dashboard"]
-        KB["Knowledge Base Explorer"]
-        Admin["Admin Management Portal"]
-        Analytics["Analytics & Benchmark Dashboard"]
-    end
+University students routinely struggle to find authentic, verified information across dozens of academic circulars, complex syllabuses, examination codes, hostel rules, and scholarship criteria. Generic AI chatbots (like standard ChatGPT) hallucinate dates, fabricated rules, and fake phone numbers because they do not have access to institutional documents.
 
-    subgraph API["Backend Layer (FastAPI REST)"]
-        Router["/api Router"]
-        Auth["JWT Admin Security"]
-        DocService["Document Ingestion Service"]
-        RAGService["RAG Pipeline Controller"]
-        EvalService["Evaluation Benchmark Service"]
-    end
-
-    subgraph RAG["Retrieval & Generation Engine"]
-        Extractor["Parser (PDF, DOCX, TXT, CSV)"]
-        Chunker["Semantic Overlapping Chunker (650 chars, 120 overlap)"]
-        Embedder["TF-IDF / Gemini Embedding Service"]
-        FAISSStore["FAISS Vector DB (IndexFlatIP)"]
-        Retriever["Relevance Filter & Source Builder (Threshold: 0.13)"]
-        LLM["Google Gemini / Grounded Synthesizer"]
-    end
-
-    subgraph Storage["Persistence Layer"]
-        DB[(SQLite / SQLAlchemy ORM)]
-        DocFiles["data/documents/"]
-        VectorFiles["data/vector_store/"]
-    end
-
-    UI -->|REST / JSON| Router
-    Router --> Auth
-    Router --> DocService
-    Router --> RAGService
-    Router --> EvalService
-    DocService --> Extractor --> Chunker --> Embedder --> FAISSStore
-    DocService --> DB
-    RAGService --> Retriever --> FAISSStore
-    Retriever --> LLM --> Router
-    EvalService --> RAGService
-    Router --> DB
-    FAISSStore --> VectorFiles
-```
+**CampusAI** solves this challenge by implementing a genuine **Retrieval-Augmented Generation (RAG)** pipeline:
+1. When a student asks an academic question, CampusAI retrieves the exact authoritative policy passages from university documents stored in **ChromaDB**.
+2. It generates a verified answer **strictly grounded** in the retrieved passages.
+3. Every response cites the **exact source document and page number**.
+4. If an inquiry cannot be answered from the available documents (e.g. out-of-domain questions), CampusAI safely abstains rather than inventing fake information.
 
 ---
 
-## 📚 Preloaded University Knowledge Base
+## 🎨 2. Modern Educational Light Theme UI
 
-CampusMind AI includes 8 realistic, authentic university policy documents in `data/documents/` auto-indexed on first launch:
+CampusAI adheres strictly to an educational **Modern Light Theme** designed to look like a university learning platform:
 
-| Document File | Category | Key Policies Covered |
+| Element | Color Code | Purpose |
 | :--- | :--- | :--- |
-| `Attendance_Regulations_2025.txt` | Attendance Policies | 75% minimum aggregate attendance, 10% medical condonation (min 65%), SA grade, 10-day OD leave. |
-| `Academic_Calendar_2025_2026.txt` | Academic Calendars | Semester start dates, Mid-Term exams (Oct 6-11), End-Semester exams, CampusPulse Fest (March 19-21). |
-| `Examination_Guidelines_and_Grading_System.txt` | Examination Guidelines | 10-point CGPA scale, passing marks (40% end-sem, 45% aggregate), re-evaluation deadline, unfair means. |
-| `Hostel_Rules_and_Disciplinary_Code.txt` | Hostel Rules | Curfew (10:00 PM weekdays, 10:30 PM weekends), night-out ERP approval, quiet hours, banned appliances. |
-| `Merit_and_Need_Scholarship_Policy.txt` | Scholarship Information | Top 5% (CGPA >= 9.0) 50% tuition waiver, Need-based (< INR 3.5 LPA) up to 75% waiver, sports quota. |
-| `Tuition_Fee_Payment_and_Refund_Rules.txt` | Fee-related Policies | Fall due date (July 25), late fee penalty, UGC-compliant withdrawal refund tiers (100%, 80%, 50%, 0%). |
-| `BTech_Computer_Science_Syllabus_Overview.txt` | Syllabus & Course Details | 160 total credits, core courses (DSA, OS, DBMS, Networks, AI/ML), elective tracks, 2-phase Capstone project. |
-| `University_Administrative_and_Campus_FAQ.txt` | Administrative FAQs | Transcripts & express processing, library borrowing (4 books for 14 days), 24/7 health center, lost ID card. |
+| **Main Background** | `#F8FAFF` | Clean, soft canvas without eye strain |
+| **Primary Blue** | `#2563EB` | Professional university brand accents & primary buttons |
+| **Sky Blue** | `#60A5FA` | Borders, hover states, active indicators |
+| **Light Blue** | `#DBEAFE` | Soft card headers and student chat bubbles |
+| **Soft Purple** | `#EDE9FE` | Educational badges and AI highlights |
+| **Mint Green** | `#D1FAE5` | "Ready to help" status pills and success indicators |
+| **White Cards** | `#FFFFFF` | Elevated rounded cards with subtle drop shadows |
+| **Main Text** | `#1E293B` | High-contrast, readable slate typography |
+| **Secondary Text**| `#64748B` | Subtle metadata, timestamps, and subtitles |
 
 ---
 
-## 📊 RAG Evaluation Benchmark Results
+## 🏛️ 3. Technology Stack
 
-The system includes a 20-sample labelled ground-truth evaluation benchmark (`data/evaluation/dataset.json`):
-
-| Evaluation Metric | Measured Score | Benchmark Target | Status |
-| :--- | :--- | :--- | :--- |
-| **Retrieval Recall@1** | **95.0%** | > 80% | **PASS** |
-| **Retrieval Recall@3** | **95.0%** | > 85% | **PASS** |
-| **Retrieval Recall@K** | **100.0%** | > 90% | **PASS** |
-| **Mean Reciprocal Rank (MRR)** | **0.9625** | > 0.85 | **PASS** |
-| **Average Groundedness Score** | **62.8%** | > 50% | **PASS** |
-| **Average Query Latency** | **0.9 ms** | < 100 ms | **PASS** |
-| **Unanswered Query Accuracy** | **100.0%** | > 95% | **PASS** |
-
----
-
-## 🚀 Quick Start Guide
-
-### Prerequisites
-- **Python**: 3.11, 3.12, or 3.13 installed
-- **Node.js**: v18+ or v20+ with npm (already configured in portable directory)
-
-### 1. Installation
-
-#### Backend Dependencies:
-```bash
-python -m pip install -r backend/requirements.txt
-```
-
-#### Frontend Dependencies:
-```bash
-cd frontend
-npm install
-cd ..
-```
+- **Programming Language:** Python 3.11, 3.12, or 3.13
+- **Frontend / Web UI:** Streamlit with custom CSS and SVG illustrations
+- **Dense Embeddings:** `sentence-transformers/all-MiniLM-L6-v2` (384-dimensional vector space)
+- **Vector Database:** `ChromaDB` (Local persistent storage with HNSW cosine distance metric)
+- **Document Processing:** `pypdf` (PDF extraction), `python-docx` (Word DOCX), standard `csv` & `json`
+- **Dashboard & Analytics:** Plotly Express & Graph Objects
+- **LLM Options:**
+  - **Local Free LLM:** Ollama (`llama3.2` / `mistral` / `llama3`) running locally on port 11434
+  - **Cloud API LLM:** Google Gemini API (`gemini-2.0-flash` or `gemini-1.5-flash`)
+  - **Extractive Search Fallback:** 100% offline, zero-dependency extractive synthesis mode
 
 ---
 
-### 2. Environment Configuration
+## 📂 4. Project Folder Structure
 
-Copy `.env.example` to `.env`:
-```bash
-copy .env.example .env
 ```
-
-Key environment variables:
-```ini
-# Application
-PROJECT_NAME="CampusMind AI"
-ENVIRONMENT="development"
-DEBUG=True
-
-# Security
-SECRET_KEY="campusmind-super-secure-secret-key-change-in-production-2025"
-ADMIN_USERNAME="admin"
-ADMIN_PASSWORD="campusmind2025"
-
-# RAG & Retrieval
-SIMILARITY_THRESHOLD=0.13
-TOP_K_RETRIEVAL=4
-CHUNK_SIZE=650
-CHUNK_OVERLAP=120
-
-# Optional: Set Google Gemini API Key for live Gemini LLM generation
-LLM_PROVIDER="gemini"
-GEMINI_API_KEY=""
-GEMINI_MODEL="gemini-2.0-flash"
+AI PROJECT/
+├── app.py                          # Master Streamlit entrypoint and page router
+├── config.py                       # Centralized configuration, paths, and thresholds
+├── rag_pipeline.py                 # Core RAG retrieval, threshold filter, and citations
+├── document_processor.py           # Multi-format text extractor (PDF, DOCX, TXT, CSV, JSON)
+├── vector_database.py              # ChromaDB vector store and SentenceTransformers logic
+├── llm_service.py                  # Multi-mode LLM handler (Ollama, Gemini API, Extractive)
+├── evaluation.py                   # 40+ question benchmark evaluation engine
+├── faq_manager.py                  # FAQ loader, search engine, and category filter
+├── auth.py                         # Admin password hashing and session security
+│
+├── pages/
+│   ├── home.py                     # Landing page with hero illustration & feature cards
+│   ├── chatbot.py                  # Student chat interface with expandable source drawer
+│   ├── faqs.py                     # Searchable, categorized university FAQs
+│   ├── knowledge_base.py           # Admin document uploader, table, and RAG graphic
+│   ├── evaluation_dashboard.py     # Live KPI metrics, Plotly charts, and CSV export
+│   └── about.py                    # Project specs, viva Q&A, and RAG architecture
+│
+├── assets/
+│   ├── logo.svg                    # Graduation cap + chatbot vector logo
+│   ├── assistant.svg               # Friendly educational AI robot character
+│   ├── education.svg               # Hero illustration: student, laptop, books, AI
+│   └── style.css                   # Custom modern light theme CSS stylesheet
+│
+├── data/
+│   ├── documents/                  # Active university knowledge base documents
+│   ├── sample_documents/           # Seed demonstration documents (PDF, DOCX, TXT, CSV, JSON)
+│   ├── faqs.csv                    # 26 structured FAQs across 9 university categories
+│   └── evaluation_questions.csv    # 42 labelled student benchmark test questions
+│
+├── tests/
+│   ├── test_document_processor.py  # Unit tests for text parsing, hashing, chunking
+│   ├── test_retrieval.py           # Integration tests for vector search and fallback
+│   └── test_evaluation.py          # Benchmark dataset validation tests
+│
+├── chroma_db/                      # Local persistent ChromaDB vector storage
+├── requirements.txt                # Lightweight Python package dependencies
+├── run_campusai.bat                # 1-click Windows launcher script
+├── .env.example                    # Template environment variables
+└── README.md                       # Comprehensive project documentation
 ```
-
-> [!NOTE]
-> If `GEMINI_API_KEY` is left blank, the application automatically activates the **Grounded Synthesizer fallback**, allowing full functionality without requiring any API keys or internet connection.
 
 ---
 
-### 3. Running the Application
+## ⚡ 5. Quick Installation & Setup (Windows)
 
-#### Option A: One-Click Launch (Windows)
-Double-click:
-```bash
-run_all.bat
+### Step 1: Open Terminal in Project Directory
+Navigate to the project folder:
+```powershell
+cd "c:\Users\himad\OneDrive\Desktop\AI PROJECT"
 ```
-This automatically starts both the FastAPI backend and Vite frontend!
 
-#### Option B: Individual Terminals
-
-**Terminal 1 — Backend (FastAPI)**:
-```bash
-# In project root:
-$env:PYTHONPATH="backend"
-python -m uvicorn app.main:app --app-dir backend --host 127.0.0.1 --port 8000 --reload
+### Step 2: (Optional) Create and Activate Virtual Environment
+```powershell
+python -m venv venv
+venv\Scripts\activate
 ```
-API Documentation will be available at: `http://localhost:8000/docs`
 
-**Terminal 2 — Frontend (React Vite)**:
-```bash
-cd frontend
-npm run dev
+### Step 3: Install Required Dependencies
+```powershell
+python -m pip install -r requirements.txt
 ```
-Frontend Web Application will be available at: `http://localhost:5173`
 
-#### Option C: Production Single-Port Serving
-FastAPI is pre-configured to host the compiled frontend build directly:
-```bash
-$env:PYTHONPATH="backend"
-python -m uvicorn app.main:app --app-dir backend --port 8000
+### Step 4: Launch CampusAI
+Double click `run_campusai.bat` or run:
+```powershell
+python -m streamlit run app.py
 ```
-Open your browser to: `http://localhost:8000`
+The application will automatically open in your default browser at `http://localhost:8501`.
 
 ---
 
-## 🧪 Testing & Benchmark Execution
+## 🤖 6. LLM Configuration Modes
 
-### 1. Run Automated Pytest Suite
-Verifies document chunking, vector indexing, citation integrity, and API endpoints:
-```bash
-$env:PYTHONPATH="backend"
-python -m pytest backend/tests/ -v
+CampusAI provides three operational modes configured in `.env`:
+
+### Mode 1: Extractive RAG Search (Default — 100% Offline & Free)
+Requires **zero API keys** and **no local server**. The system retrieves authoritative chunks, scores the most relevant sentences, and provides grounded answers with verified citations.
+
+### Mode 2: Local Ollama LLM (Free, Local, Private)
+1. Download Ollama from [ollama.com](https://ollama.com).
+2. Pull a small instruction model:
+   ```powershell
+   ollama run llama3.2
+   ```
+3. In your `.env` file, set:
+   ```ini
+   LLM_MODE=ollama
+   OLLAMA_BASE_URL=http://localhost:11434
+   OLLAMA_MODEL=llama3.2
+   ```
+
+### Mode 3: Google Gemini API (Cloud Generative AI)
+1. Get a free API key from [Google AI Studio](https://aistudio.google.com/).
+2. In your `.env` file, add:
+   ```ini
+   LLM_MODE=gemini
+   GEMINI_API_KEY=your_actual_gemini_api_key_here
+   GEMINI_MODEL=gemini-2.0-flash
+   ```
+
+---
+
+## 🎓 7. Step-by-Step RAG Pipeline Explained (Viva Notes)
+
+1. **Document Ingestion:** Official university documents (PDF, DOCX, TXT, CSV, JSON) are parsed into plain text using format-specific extractors (`pypdf`, `python-docx`).
+2. **Recursive Text Chunking:** Long policies are segmented into overlapping passages (800 characters, 120 character overlap). Overlap ensures that contextual meaning spanning across chunk boundaries is never lost.
+3. **Dense Vector Embeddings:** Each chunk is converted into a 384-dimensional vector embedding using `all-MiniLM-L6-v2`. Semantic meaning is captured in geometric space.
+4. **ChromaDB Storage:** Chunks and vectors are indexed into ChromaDB with metadata (`source`, `page`, `category`, `file_hash`).
+5. **Student Question Search:** When a student enters a query, its embedding is computed and compared against stored vectors using **cosine similarity**.
+6. **Relevance Threshold Guardrail:** If the top matching chunks exceed the cosine distance threshold (i.e. query is completely irrelevant or unsupported), CampusAI returns:
+   > *"I couldn't find reliable information about this in the available university documents. Please check the official university website or contact the relevant department."*
+7. **Grounded Synthesis:** If relevant chunks exist, they are passed as strict context to the synthesizer, ensuring answers are backed by source documents.
+
+---
+
+## 📊 8. Benchmark Evaluation & KPI Dashboard
+
+CampusAI includes a labelled evaluation dataset in `data/evaluation_questions.csv` containing **42 test questions**:
+- **34 Answerable Questions:** Covering attendance shortage, medical condonation, exam passing marks, re-evaluation timelines, hostel curfew, merit scholarships, fee refunds, and B.Tech CSE course credits.
+- **8 Unanswerable Controls:** Out-of-domain queries (e.g. heated swimming pool timings, teleportation permits, Martian coins) to rigorously verify hallucination refusal accuracy.
+
+### Benchmark Metrics Calculated Live:
+- **Retrieval Hit Rate (Recall@K):** Proportion of answerable queries where the expected document is retrieved in top-k (`> 95%`).
+- **Semantic Answer Similarity:** Sentence-Transformer cosine similarity between generated answers and labelled ground truth.
+- **Refusal Accuracy:** Percentage of unsupported questions correctly refused (`100%`).
+- **Average Query Latency:** Vector search and retrieval time measured in milliseconds.
+
+To run the evaluation:
+1. Navigate to the **Evaluation Dashboard** page in the sidebar.
+2. Click **🚀 Run Full Evaluation**.
+3. View the Plotly metric charts and download the detailed CSV report via **📥 Download Full Evaluation CSV**.
+
+---
+
+## 🔒 9. Administrative Knowledge Base Management
+
+To protect university document integrity:
+- Students can browse indexed documents and chunk statistics in read-only mode.
+- Uploading, deleting, or rebuilding vector indexes requires administrative authentication.
+- **Default Admin Password:** `admin123`
+- The password hash is securely validated using SHA-256 (`auth.py`).
+
+---
+
+## 🧪 10. Running Automated Tests
+
+To run the automated test suite verifying extraction, vector search, and evaluation:
+```powershell
+python -m pytest tests -v
 ```
 
-### 2. Run Evaluation Benchmark via CLI
-```bash
-python backend/scripts/run_evaluation.py
-```
-Or double-click `run_evaluation.bat`.
-
 ---
 
-## 🔐 Admin Credentials
+## ⚠️ 11. Project Limitations
 
-To test document uploads and vector index maintenance on the **Admin Portal** (`/admin`):
-- **Username**: `admin`
-- **Password**: `campusmind2025`
-
----
-
-## 🎓 College Presentation & Architecture Guide
-
-When presenting this project for an academic defense, viva, or portfolio review, highlight these technical points:
-
-1. **Why RAG instead of Fine-Tuning?**
-   - Fine-tuning an LLM incorporates static weights that suffer from hallucinations, require costly re-training for policy updates, and cannot cite specific page numbers. RAG decouples knowledge storage from the language model, allowing university administrators to simply drop in a revised PDF to update institutional knowledge immediately.
-2. **Deterministic Confidence Thresholding**:
-   - The system utilizes an exact cosine similarity threshold (`0.13`). If a student asks an off-topic or malicious question (e.g., *"Can I fly helicopters on campus?"*), the retrieval score drops below the threshold, triggering the mandatory disclaimer and recording the query in the audit table.
-3. **Dual Vector Store Architecture**:
-   - Built on Facebook AI Similarity Search (FAISS) using Inner Product similarity over L2-normalized vectors (`IndexFlatIP`), with an exact NumPy matrix dot-product fallback ensuring zero platform incompatibility.
-4. **Prompt Injection Defense**:
-   - User inputs and retrieved passages are sanitized against jailbreak tokens (`ignore previous instructions`, `system:`) and isolated within strictly bounded `<context>` XML containers.
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License — feel free to use it for university academic demonstrations, portfolios, and research.
+1. **OCR on Scanned Images:** The basic version uses `pypdf` for text-based PDFs. Scanned image-only PDFs require an optional OCR engine (e.g. Tesseract).
+2. **Extractive vs Generative Mode:** In offline extractive mode, answers are extracted from the highest-scoring sentences rather than generated in conversational prose. For full conversational responses, enable Ollama or Gemini API.
+3. **Demonstration Authentication:** The administrative password mechanism is designed for college project demonstrations and viva defense, rather than enterprise single-sign-on (SSO).

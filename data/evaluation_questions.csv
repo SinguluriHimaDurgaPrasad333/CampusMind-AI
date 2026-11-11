@@ -1,0 +1,43 @@
+question_id,question,expected_answer,expected_source,category,answerable
+EVAL-01,What is the minimum attendance percentage required to sit for end-semester exams?,A student must secure a minimum aggregate attendance of 75% across all lectures tutorials and labs of that course.,Attendance_Regulations_2025.txt,Attendance requirements,True
+EVAL-02,What grade is awarded to a student debarred due to shortage of attendance?,A debarred student receives an 'SA' (Shortage of Attendance) grade with 0 grade points and must re-register.,Attendance_Regulations_2025.txt,Attendance requirements,True
+EVAL-03,What is the maximum attendance condonation granted on medical grounds?,The Dean of Academic Affairs may grant up to 10% medical condonation lowering the requirement to 65%.,Attendance_Regulations_2025.txt,Attendance requirements,True
+EVAL-04,Can a student with less than 65% attendance appear for semester exams on medical grounds?,No. Under no circumstances is attendance below 65% permitted regardless of medical validity.,Attendance_Regulations_2025.txt,Attendance requirements,True
+EVAL-05,What is the deadline to submit medical certificates to the Chief Medical Officer?,Medical documents must be endorsed by the CMO within 5 working days of resuming classes.,Attendance_Regulations_2025.txt,Attendance requirements,True
+EVAL-06,How many days of On-Duty (OD) leave are permitted per semester?,A maximum of 10 working days per semester may be sanctioned as OD leave for approved events.,Attendance_Regulations_2025.txt,Attendance requirements,True
+EVAL-07,Within how many days must students report attendance discrepancies to their instructor?,Discrepancies in attendance must be reported within 7 calendar days of the relevant lecture.,Attendance_Regulations_2025.txt,Attendance requirements,True
+EVAL-08,When is the Final Debarment List published prior to exams?,The Final Debarment List is published 5 working days prior to the commencement of end-semester exams.,Attendance_Regulations_2025.txt,Attendance requirements,True
+EVAL-09,What are the dates for Fall semester mid-term exams in the 2025-2026 calendar?,Mid-Term Examinations for Fall semester are scheduled from October 6 to October 11 2025.,Academic_Calendar_2025_2026.txt,Notices,True
+EVAL-10,When does the Spring 2026 semester start?,Spring semester classes commence on January 5 2026.,Academic_Calendar_2025_2026.txt,Notices,True
+EVAL-11,What are the dates of the annual cultural and tech fest CampusPulse?,CampusPulse is scheduled from March 19 to March 21 2026.,Academic_Calendar_2025_2026.txt,Notices,True
+EVAL-12,When is the last instructional day for the Spring 2026 semester?,The last instructional day for Spring 2026 is April 24 2026.,Academic_Calendar_2025_2026.txt,Notices,True
+EVAL-13,What minimum percentage must a student score in the end-semester exam to pass?,A student must score at least 40% in the End-Semester Examination to pass.,Examination_Guidelines_and_Grading_System.txt,Examination procedures,True
+EVAL-14,What is the minimum overall aggregate passing percentage combining CIA and end-sem?,A student must secure at least 45% aggregate marks combining CIA and end-semester exams.,Examination_Guidelines_and_Grading_System.txt,Examination procedures,True
+EVAL-15,Within how many days can a student apply for re-evaluation of theory exam papers?,Students may apply for re-evaluation within 10 calendar days of grade declaration.,Examination_Guidelines_and_Grading_System.txt,Examination procedures,True
+EVAL-16,What is the scrutiny fee for re-evaluating one theory course?,The scrutiny fee is INR 500 per theory course.,Examination_Guidelines_and_Grading_System.txt,Examination procedures,True
+EVAL-17,Is re-evaluation permitted for laboratory courses and project vivas?,No. Re-evaluation is strictly restricted to theory courses and not permitted for labs or vivas.,Examination_Guidelines_and_Grading_System.txt,Examination procedures,True
+EVAL-18,What is the penalty for possessing a mobile phone inside the examination hall?,Confiscation referral to the Unfair Means Committee debarment from remaining papers and rustication for one semester.,Examination_Guidelines_and_Grading_System.txt,Examination procedures,True
+EVAL-19,What is the hostel curfew time on weekdays?,Curfew is 10:00 PM on weekdays (Sunday to Thursday).,Hostel_Rules_and_Disciplinary_Code.txt,Academic regulations,True
+EVAL-20,What is the hostel curfew time on weekends?,Curfew is 10:30 PM on weekends (Friday and Saturday).,Hostel_Rules_and_Disciplinary_Code.txt,Academic regulations,True
+EVAL-21,What fine is charged for possessing banned appliances like electric kettles or cooktops in hostels?,Possession of prohibited electrical appliances carries a fine of INR 2000 and confiscation.,Hostel_Rules_and_Disciplinary_Code.txt,Academic regulations,True
+EVAL-22,How much advance notice is required to apply for a hostel night-out pass?,Night-out pass requests must be submitted at least 24 hours in advance with parent consent.,Hostel_Rules_and_Disciplinary_Code.txt,Academic regulations,True
+EVAL-23,What CGPA and rank are needed for the Chancellor's Merit Scholarship?,Top 5% rank in the branch with a CGPA of 9.0 or higher with zero backlogs and 85%+ attendance.,Merit_and_Need_Scholarship_Policy.txt,Scholarships,True
+EVAL-24,What fee waiver does the Chancellor's Merit Scholarship provide?,A 50% tuition fee waiver for the subsequent academic year.,Merit_and_Need_Scholarship_Policy.txt,Scholarships,True
+EVAL-25,What is the income ceiling to qualify for Need-Based Financial Assistance?,Gross annual family income must be below INR 3.50 Lakhs.,Merit_and_Need_Scholarship_Policy.txt,Scholarships,True
+EVAL-26,What concession is awarded to students representing the state in national sports championships?,A 50% tuition fee waiver for that academic year.,Merit_and_Need_Scholarship_Policy.txt,Scholarships,True
+EVAL-27,What is the fall semester tuition fee payment due date without late fine?,The deadline for Fall semester fee payment is July 25.,Tuition_Fee_Payment_and_Refund_Rules.txt,Academic regulations,True
+EVAL-28,What is the late fee per day after the tuition payment due date?,A late fee penalty of INR 100 per day is charged up to 15 days.,Tuition_Fee_Payment_and_Refund_Rules.txt,Academic regulations,True
+EVAL-29,What percentage of fee is refunded if withdrawal is requested 15 days before class commencement?,100% refund of tuition and academic fees minus an administrative fee of up to INR 1000.,Tuition_Fee_Payment_and_Refund_Rules.txt,Academic regulations,True
+EVAL-30,How many total credits must a student complete to earn a B.Tech CSE degree?,Students must successfully complete 160 credits to graduate.,BTech_Computer_Science_Syllabus_Overview.txt,University syllabus,True
+EVAL-31,What is the course code for Data Structures and Algorithms in B.Tech CSE?,The course code is CS201.,BTech_Computer_Science_Syllabus_Overview.txt,University syllabus,True
+EVAL-32,How many books can undergraduate students borrow from the library and for what duration?,Undergraduates can borrow up to 4 books for a duration of 14 days.,University_Administrative_and_Campus_FAQ.txt,University services,True
+EVAL-33,What is the fee and regular processing time for issuing an official transcript?,The fee is INR 300 per set and processing takes 7 working days.,University_Administrative_and_Campus_FAQ.txt,University services,True
+EVAL-34,What fee is charged for a duplicate student ID card?,A replacement fee of INR 200 is charged and it is issued within 3 working days.,University_Administrative_and_Campus_FAQ.txt,University services,True
+EVAL-35,What are the rules and timings for using the campus Olympic heated swimming pool?,None,None,University services,False
+EVAL-36,How can a student apply for an international rocket flight to the Lunar research station?,None,None,Academic regulations,False
+EVAL-37,What is the syllabus and lab manual for the Advanced Time Machine Engineering course?,None,None,University syllabus,False
+EVAL-38,What is the parking fee for landing a private helicopter on the university campus roof?,None,None,University services,False
+EVAL-39,How much discount does the university provide for pet dinosaur grooming services?,None,None,FAQs,False
+EVAL-40,What are the admission requirements for the Hogwarts School of Witchcraft exchange program?,None,None,Academic regulations,False
+EVAL-41,Does the university cafeteria accept payments in Martian gold coins?,None,None,FAQs,False
+EVAL-42,What is the procedure for obtaining a quantum teleportation permit on campus?,None,None,Academic regulations,False

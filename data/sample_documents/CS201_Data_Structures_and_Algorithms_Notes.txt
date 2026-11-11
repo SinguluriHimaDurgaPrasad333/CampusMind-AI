@@ -1,0 +1,36 @@
+CAMPUS UNIVERSITY DEPARTMENT OF COMPUTER SCIENCE & ENGINEERING
+COURSE CODE: CS201
+COURSE TITLE: DATA STRUCTURES AND ALGORITHMS
+CATEGORY: University Syllabus and Course Details
+ACADEMIC YEAR: 2025-2026
+
+1. LINEAR DATA STRUCTURES
+1.1 Arrays and Linked Lists:
+- Singly, Doubly, and Circular Linked Lists. Insertion, deletion, reversal, and cycle detection (Floyd's Tortoise and Hare algorithm).
+1.2 Stacks and Queues:
+- Stack operations (LIFO) for function call stacks, parenthesis matching, infix to postfix conversion.
+- Queue operations (FIFO), Circular Queue, Double-Ended Queue (Deque), and Priority Queue using Binary Heaps.
+
+2. TREES AND SEARCHING
+2.1 Binary Search Tree (BST):
+- Binary tree where left subtree keys < node key < right subtree keys. In-order traversal produces sorted keys.
+- Search, Insertion, Deletion time complexity: O(h), where h is height. In balanced BST, h = O(log n).
+2.2 Self-Balancing Trees (AVL Trees and Red-Black Trees):
+- AVL trees maintain balance factor = height(left) - height(right) in {-1, 0, 1} through Single (LL, RR) and Double (LR, RL) rotations. Guarantees O(log n) worst-case time for search, insert, and delete.
+
+3. GRAPH ALGORITHMS
+3.1 Graph Representations:
+- Adjacency Matrix: O(V^2) space, O(1) edge lookup.
+- Adjacency List: O(V + E) space, efficient for sparse graphs.
+3.2 Graph Traversals:
+- Breadth-First Search (BFS): Uses queue, finds shortest path in unweighted graphs, O(V + E) time.
+- Depth-First Search (DFS): Uses recursion/stack, topological sort, cycle detection in directed graphs, O(V + E) time.
+3.3 Shortest Path Algorithms:
+- Dijkstra's Algorithm: Greedy single-source shortest path for non-negative edge weights using Min-Heap, O((V + E) log V) time.
+- Bellman-Ford Algorithm: Handles negative edge weights, detects negative cycles, O(V * E) time.
+
+4. ALGORITHM DESIGN TECHNIQUES
+4.1 Dynamic Programming (DP):
+- Characterized by Overlapping Subproblems and Optimal Substructure. Top-down with Memoization or Bottom-up with Tabulation (e.g., 0/1 Knapsack, Longest Common Subsequence).
+4.2 Greedy Algorithms:
+- Makes locally optimal choice at each stage (e.g., Fractional Knapsack, Huffman Coding, Kruskal's/Prim's Minimum Spanning Tree).
