@@ -9,9 +9,11 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 
-# Enforce offline mode for Hugging Face Hub & Transformers (avoids connection retries)
-os.environ["HF_HUB_OFFLINE"] = "1"
-os.environ["TRANSFORMERS_OFFLINE"] = "1"
+# Enable offline mode only if the model is already downloaded locally
+_hf_cache = Path.home() / ".cache" / "huggingface" / "hub"
+if _hf_cache.exists() and any(_hf_cache.glob("*all-MiniLM-L6-v2*")):
+    os.environ.setdefault("HF_HUB_OFFLINE", "1")
+    os.environ.setdefault("TRANSFORMERS_OFFLINE", "1")
 
 # Load environment variables from .env file if available
 load_dotenv()
