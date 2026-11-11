@@ -29,12 +29,16 @@ from evaluation import load_evaluation_dataset, run_rag_evaluation
 app = Flask(__name__, static_folder="static", template_folder="templates")
 app.secret_key = os.urandom(24)
 
-# Ensure knowledge base is initialized on application startup
-with app.app_context():
+import threading
+
+# Initialize knowledge base asynchronously so Gunicorn binds to port instantly
+def _init_knowledge_base():
     try:
         ensure_knowledge_base_initialized()
     except Exception as e:
         print(f"Knowledge base auto-init note: {e}")
+
+threading.Thread(target=_init_knowledge_base, daemon=True).start()
 
 
 # ----------------- PAGE ROUTES -----------------

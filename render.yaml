@@ -3,8 +3,10 @@ services:
     name: campusmind-ai
     env: python
     plan: free
-    buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn app:app
+    buildCommand: pip install -r requirements.txt && python scripts/download_model.py
+    startCommand: gunicorn --bind 0.0.0.0:$PORT --workers 1 --threads 2 --timeout 120 app:app
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.9
+      - key: MALLOC_ARENA_MAX
+        value: 2

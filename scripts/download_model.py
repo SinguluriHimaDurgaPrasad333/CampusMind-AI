@@ -1,16 +1,9 @@
-import sys
-import time
+"""
+Pre-indexes university documents into the memory-safe vector store.
+"""
+from rag_pipeline import ensure_knowledge_base_initialized
 
-print("Step 1: Importing sentence_transformers...", flush=True)
-t0 = time.time()
-from sentence_transformers import SentenceTransformer
-print(f"Step 1 Complete: Imported in {time.time()-t0:.2f}s", flush=True)
-
-print("Step 2: Initializing SentenceTransformer('all-MiniLM-L6-v2')...", flush=True)
-t1 = time.time()
-model = SentenceTransformer("all-MiniLM-L6-v2")
-print(f"Step 2 Complete: Loaded in {time.time()-t1:.2f}s", flush=True)
-
-print("Step 3: Testing test encoding...", flush=True)
-emb = model.encode(["CampusAI university chatbot"])
-print(f"Step 3 Complete: Embedding shape {emb.shape}", flush=True)
+if __name__ == "__main__":
+    print("Pre-indexing university documents for fast deployment...", flush=True)
+    count = ensure_knowledge_base_initialized()
+    print(f"Successfully indexed {count} document chunks into vector store!", flush=True)
