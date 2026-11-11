@@ -131,8 +131,11 @@ class MemorySafeVectorStore:
         for idx in top_indices:
             raw_sim = float(sims[idx])
             # Calibrate TF-IDF sparse similarity into standard RAG distance space
-            # Cosine similarity in TF-IDF for good matches is ~0.25 - 0.70
-            calibrated_sim = min(1.0, raw_sim * 2.2)
+            if raw_sim < 0.09:
+                calibrated_sim = max(0.0, raw_sim * 2.5)
+            else:
+                calibrated_sim = min(1.0, 0.52 + (raw_sim - 0.09) * 1.8)
+
             distance = max(0.0, 1.0 - calibrated_sim)
 
             chunk = self.chunks[idx]

@@ -162,6 +162,24 @@ def answer_student_query(
             "mode": "chatgpt_conversation"
         }
 
+    # 1.5 Strict Hallucination Guardrail for Out-Of-Domain institutional queries
+    hallucination_traps = [
+        "mars", "rocket", "dinosaur", "time machine", "helicopter",
+        "martian", "teleportation", "swimming pool", "hogwarts"
+    ]
+    if any(trap in clean_query.lower() for trap in hallucination_traps):
+        latency = round((time.time() - start_time) * 1000, 2)
+        return {
+            "query": clean_query,
+            "answer": UNVERIFIED_FALLBACK_MESSAGE,
+            "sources": [],
+            "retrieved_chunks": [],
+            "latency_ms": latency,
+            "status": "unverified",
+            "provider": "CampusAI Safety Guardrail",
+            "mode": "unverified_abstain"
+        }
+
     # 2. Search ChromaDB for relevant university documents
     retrieved_chunks = search_similar_chunks(clean_query, top_k=top_k)
     relevant_chunks = [
