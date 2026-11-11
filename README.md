@@ -1,9 +1,12 @@
 # CampusAI – AI Student Assistance Chatbot
 
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Render-46E3B7?style=for-the-badge&logo=render&logoColor=white)](https://campusmind-ai-jyek.onrender.com/)
 [![Python](https://img.shields.io/badge/Python-3.11%20%7C%203.12%20%7C%203.13-2563EB.svg)](https://www.python.org/)
 [![Flask](https://img.shields.io/badge/Flask-3.0+-000000.svg)](https://flask.palletsprojects.com/)
-[![Render](https://img.shields.io/badge/Render-Deploy%20Ready-46E3B7.svg)](https://render.com/)
+[![Render](https://img.shields.io/badge/Render-Deployed%20Live-46E3B7.svg)](https://campusmind-ai-jyek.onrender.com/)
 [![License](https://img.shields.io/badge/License-MIT-059669.svg)](LICENSE)
+
+> 🌐 **Live Deployed Application:** [https://campusmind-ai-jyek.onrender.com/](https://campusmind-ai-jyek.onrender.com/)
 
 **Project Code:** P08  
 **Project Title:** AI Student Assistance Chatbot  
@@ -122,6 +125,8 @@ Open `http://localhost:8501` in your browser.
 ---
 
 ## 🚀 6. Deploying on Render (Free Tier 512 MiB Safe)
+
+**Live Production URL:** [https://campusmind-ai-jyek.onrender.com/](https://campusmind-ai-jyek.onrender.com/)
 
 When creating a new **Web Service** on Render connected to this repository:
 
